@@ -1,11 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "empresas.h"
 
 #define VOLTARMENU "4 - Voltar ao menu anterior\n"
 #define SAIR "5 - Sair\n"
 
 int main() {
-
+    
+    Empresas Empresa = {.contador = 0};
+    
     int opc, opc1, opc2;
     do {
         printf("1-Administrador\n");
@@ -33,7 +36,8 @@ int main() {
                             scanf("%d", &opc2);
                         } while (opc2 < 0 || opc2 > 5);
                         switch (opc2) {
-                            case 1: //criar
+                            case 1:
+                                criarEmpresa(&Empresa);
                                 break;
                             case 2: //editar
                                 break;
@@ -70,7 +74,30 @@ int main() {
                         }
                         break;
                     case 3:
-                        puts("Relatorios");
+                        do {
+                            printf("1- Listar empresas\n");
+                            printf("2- Relatorio\n");
+                            printf("3- Relatorio\n");
+                            printf(VOLTARMENU);
+                            printf(SAIR);
+                            scanf("%d", &opc2);
+                        } while (opc2 < 0 || opc2 > 5);
+                        switch (opc2) {
+                            case 1:
+                                mostrarEmpresas(&Empresa);
+                                break;
+                            case 2:
+                                printf("2- Relatorio\n");
+                                break;
+                            case 3:
+                                printf("3- Relatorio\n");
+                                break;
+                            case 4: 
+                                break;
+                            case 5: 
+                                opc = 4;
+                                break;
+                        }
                         break;
                     case 4:
                         break;
@@ -107,4 +134,6 @@ int main() {
                 break;
         }
     } while (opc != 4);
+    
+    liberarMemoriaEmpresas(&Empresa);
 }
