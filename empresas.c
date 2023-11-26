@@ -4,7 +4,7 @@
 #include "string.h"
 #include "ctype.h"
 
-void criarEmpresa(Empresas *catalogo) {
+void criarEmpresa(Empresas *catalogo, Ramos *catalogoRamos) {
     if (catalogo->contador == catalogo->alocadas) {
         // Numero maximo atingido aloca mais!
         catalogo->alocadas += 10; 
@@ -18,8 +18,8 @@ void criarEmpresa(Empresas *catalogo) {
     printf("Nome da empresa: ");
     scanf("%s", novaEmpresa.nome);
     do {
-    printf("Categoria da empresa(Micro, PME ou Grande empresa");
-    scanf("%s", novaEmpresa.categoria);
+        printf("Categoria da empresa(Micro, PME ou Grande empresa): ");
+        scanf("%s", novaEmpresa.categoria);
     }while(strcmp(novaEmpresa.categoria, "Micro") && strcmp(novaEmpresa.categoria, "PME") && strcmp(novaEmpresa.categoria, "Grande empresa"));
     printf("Rua da empresa: ");
     scanf("%s", novaEmpresa.rua);
@@ -27,6 +27,21 @@ void criarEmpresa(Empresas *catalogo) {
     scanf("%s", novaEmpresa.localidade);
     printf("Codigo postal da empresa: ");
     scanf("%s", novaEmpresa.codigoPostal);
+
+    if(catalogoRamos->contador > 0) {
+        for(int i = 0; i < catalogoRamos->contador; i++) {
+            printf("%d. %s\n", i+1, catalogoRamos->ramos[i].nome);
+        }
+        int escolha;
+        do {
+            printf("Escolha o ramo de atividade da empresa (1-%d): ", catalogoRamos->contador);
+            scanf("%d", &escolha);
+        } while(escolha < 1 || escolha > catalogoRamos->contador);
+        strcpy(novaEmpresa.ramo, catalogoRamos->ramos[escolha-1].nome);
+    } else {
+        printf("Não existem ramos de atividade disponíveis. Por favor, crie um ramo de atividade antes de criar uma empresa.\n");
+        return;
+    }
 
     novaEmpresa.estado = 1;
     
@@ -36,9 +51,54 @@ void criarEmpresa(Empresas *catalogo) {
     printf("Empresa criada com sucesso!\n");
 }
 
-void editarEmpresas(Empresas *catalogo){
-    
+void editarEmpresa(Empresas *catalogo, Ramos *catalogoRamos) {
+    char nif[MAXG];
+    printf("Intruduza o nif da empresa que pretende editar: ");
+    scanf("%s", nif);
+
+    for (int i = 0; i < catalogo->contador; i++) {
+        if (strcmp(catalogo->empresas[i].nif, nif) == 0) {
+            printf("Intruduza o novos detalhes da empresa:\n");
+
+            printf("NIF: ");
+            scanf("%s", catalogo->empresas[i].nif);
+            printf("Nome: ");
+            scanf("%s", catalogo->empresas[i].nome);
+            do {
+                printf("Categoria (Micro, PME or Grande empresa): ");
+                scanf("%s", catalogo->empresas[i].categoria);
+            } while(strcmp(catalogo->empresas[i].categoria, "Micro") && strcmp(catalogo->empresas[i].categoria, "PME") && strcmp(catalogo->empresas[i].categoria, "Grande empresa"));
+            printf("Rua: ");
+            scanf("%s", catalogo->empresas[i].rua);
+            printf("Localidade: ");
+            scanf("%s", catalogo->empresas[i].localidade);
+            printf("Codigo postal: ");
+            scanf("%s", catalogo->empresas[i].codigoPostal);
+            printf("Estado: (0/1)");
+            scanf("%d", catalogo->empresas[i].estado);
+
+            if(catalogoRamos->contador > 0) {
+                for(int j = 0; j < catalogoRamos->contador; j++) {
+                    printf("%d. %s\n", j+1, catalogoRamos->ramos[j].nome);
+                }
+                int escolha;
+                do {
+                    printf("Escolha o novo ramo de atividade da empresa (1-%d): ", catalogoRamos->contador);
+                    scanf("%d", &escolha);
+                } while(escolha < 1 || escolha > catalogoRamos->contador);
+                strcpy(catalogo->empresas[i].ramo, catalogoRamos->ramos[escolha-1].nome);
+            } else {
+                printf("Não existem ramos de atividade disponíveis. Por favor, crie um ramo de atividade antes de editar uma empresa.\n");
+                return;
+            }
+            printf("Empresa editada!\n");
+            return;
+        }
+    }
+
+    printf(NENCONTRADO);
 }
+
 
 void mostrarEmpresas(Empresas *catalogo) {
     printf("Empresas criadas:\n");
@@ -48,6 +108,7 @@ void mostrarEmpresas(Empresas *catalogo) {
         printf("Nome: %s\n", catalogo->empresas[i].nome);
         printf("Nif: %s\n", catalogo->empresas[i].nif);
         printf("Categoria: %s\n", catalogo->empresas[i].categoria);
+        printf("Ramo: %s\n", catalogo->empresas[i].ramo);  
         printf("Rua: %s\n", catalogo->empresas[i].rua);
         printf("Localidade: %s\n", catalogo->empresas[i].localidade);
         printf("Codigo postal: %s\n", catalogo->empresas[i].codigoPostal);
@@ -68,6 +129,47 @@ void empresasAtivas(Empresas *catalogo) {
         printf("\n");
     }
 }
+
+void removerEmpresa(Empresas *catalogo) {
+
+}
+
+//NAO WORK
+void classificarEmpresa(Empresas *catalogo) {
+    char nif[MAXG];
+    printf("Nif da empresa a classificar: ");
+    scanf("%s", nif);
+
+    for(int i = 0; i < catalogo->contador; i++) {
+        if(strcmp(catalogo->empresas[i].nif, nif) == 0) {
+            if(catalogo->contador == catalogo->alocadas) {
+                // Numero maximo atingido aloca mais!
+                catalogo->alocadas += 10; 
+                catalogo->empresas[i].classis = realloc(catalogo->empresas[i].classis, catalogo->alocadas * sizeof(Classificacao));
+            }
+            Classificacao novaClassificacao;
+
+            printf("Nome do utilizador: ");
+            scanf("%s", novaClassificacao.nome);
+            printf("Email do utilizador: ");
+            scanf("%s", novaClassificacao.email);
+            do {
+                printf("Avaliacao da empresa (0-5): ");
+                scanf("%d", &novaClassificacao.avaliacao);
+            } while(novaClassificacao.avaliacao < 0 || novaClassificacao.avaliacao > 5);
+
+            catalogo->empresas[i].classis[catalogo->empresas[i].nClassificacoes] = novaClassificacao;
+            catalogo->empresas[i].nClassificacoes++;
+
+            printf("Classificacao adicionada com sucesso!\n");
+            return;
+        }
+    }
+
+    printf("Empresa nao encontrada.\n");
+}
+
+
 
 void liberarMemoriaEmpresas(Empresas *catalogo) {
     for (int i = 0; i < catalogo->contador; i++) {
