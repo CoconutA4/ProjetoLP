@@ -29,7 +29,7 @@ typedef struct {
     char ramo[MAXG];
     char rua[MAXBIG];
     char localidade[MAXG];
-    int codigoPostal;
+    char codigoPostal[MAXG];
     int estado;
     int nClassificacoes;
     Classificacao *classis;
@@ -47,6 +47,10 @@ typedef struct {
 void criarEmpresa(Empresas *catalogo);
 void mostrarEmpresas(Empresas *catalogo);
 void liberarMemoriaEmpresas(Empresas *catalogo);
+void empresasAtivas(Empresas *catalogo);
+void editarEmpresa(Empresas *catalogo);
+void removerEmpresa(Empresas *catalogo);
+
 
 #ifdef __cplusplus
 }
