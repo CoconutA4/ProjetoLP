@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "empresas.h"
+#include "ramos.h"
+#include "pesquisas.h"
 
 #define VOLTARMENU "4 - Voltar ao menu anterior\n"
 #define SAIR "5 - Sair\n"
@@ -8,6 +10,8 @@
 int main() {
     
     Empresas Empresa = {.contador = 0};
+    Ramos Ramo = {.contador = 0};
+    Pesquisas Pesquisa = {.contador = 0};
     
     int opc, opc1, opc2;
     do {
@@ -37,11 +41,13 @@ int main() {
                         } while (opc2 < 0 || opc2 > 5);
                         switch (opc2) {
                             case 1:
-                                criarEmpresa(&Empresa);
+                                criarEmpresa(&Empresa, &Ramo);
                                 break;
-                            case 2: //editar
+                            case 2:
+                                editarEmpresa(&Empresa, &Ramo);
                                 break;
-                            case 3: //remover
+                            case 3:
+                                removerEmpresa(&Empresa);
                                 break;
                             case 4: 
                                 break;
@@ -60,11 +66,14 @@ int main() {
                             scanf("%d", &opc2);
                         } while (opc2 < 0 || opc2 > 5);
                         switch (opc2) {
-                            case 1: //criar
+                            case 1:
+                                criarRamo(&Ramo);
                                 break;
-                            case 2: //editar
+                            case 2:
+                                editarRamo(&Ramo);
                                 break;
-                            case 3: //remover
+                            case 3:
+                                removerRamo(&Ramo, &Empresa);
                                 break;
                             case 4: 
                                 break;
@@ -76,25 +85,29 @@ int main() {
                     case 3:
                         do {
                             printf("1- Listar empresas\n");
-                            printf("2- Relatorio\n");
-                            printf("3- Relatorio\n");
-                            printf(VOLTARMENU);
-                            printf(SAIR);
+                            printf("2- Empresas ativas\n");
+                            printf("3- Listar ramos\n");
+                            printf("4- Ramos ativos\n");
+                            printf("5- Voltar ao menu anterior\n");
+                            printf("6- Sair!");
                             scanf("%d", &opc2);
-                        } while (opc2 < 0 || opc2 > 5);
+                        } while (opc2 < 0 || opc2 > 6);
                         switch (opc2) {
                             case 1:
                                 mostrarEmpresas(&Empresa);
                                 break;
                             case 2:
-                                printf("2- Relatorio\n");
+                                empresasAtivas(&Empresa);
                                 break;
                             case 3:
-                                printf("3- Relatorio\n");
+                                mostrarRamos(&Ramo);
                                 break;
-                            case 4: 
+                            case 4:
+                                ramosAtivos(&Ramo);
                                 break;
                             case 5: 
+                                break;
+                            case 6: 
                                 opc = 4;
                                 break;
                         }
@@ -116,9 +129,11 @@ int main() {
                     scanf("%d", &opc1);
                 } while (opc1 < 0 || opc1 > 5);
                 switch (opc1) {
-                    case 1: //pesquisar empresa
+                    case 1:
+                        procurarEmpresa(&Empresa, &Pesquisa);
                         break;
-                    case 2: //classificar empresa
+                    case 2:
+                        classificarEmpresa(&Empresa);
                         break;
                     case 3: //comentar relatiorios
                         break;
@@ -136,4 +151,6 @@ int main() {
     } while (opc != 4);
     
     liberarMemoriaEmpresas(&Empresa);
+    liberarMemoriaRamos(&Ramo);
+    liberarMemoriaPesquisas(&Pesquisa);
 }
