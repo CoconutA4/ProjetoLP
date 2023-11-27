@@ -35,7 +35,7 @@ void procurarEmpresa(Empresas *catalogo, Pesquisas *pesquisas) {
             break;
         }
     }
-
+    //gat
     if(encontrou) {
         printf("Empresa existe!\n");
     } else {

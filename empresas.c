@@ -28,6 +28,7 @@ void criarEmpresa(Empresas *catalogo, Ramos *catalogoRamos) {
     printf("Codigo postal da empresa: ");
     scanf("%s", novaEmpresa.codigoPostal);
 
+    //gatt
     if(catalogoRamos->contador > 0) {
         for(int i = 0; i < catalogoRamos->contador; i++) {
             printf("%d. %s\n", i+1, catalogoRamos->ramos[i].nome);
