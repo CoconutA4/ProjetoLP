@@ -16,13 +16,13 @@ void criarEmpresa(Empresas *catalogo, Ramos *catalogoRamos) {
     printf("Nif da empresa: ");
     scanf("%s", novaEmpresa.nif);
     printf("Nome da empresa: ");
-    scanf("%s", novaEmpresa.nome);
+    scanf(" %[^\n]", novaEmpresa.nome);
     do {
         printf("Categoria da empresa(Micro, PME ou Grande empresa): ");
         scanf("%s", novaEmpresa.categoria);
     }while(strcmp(novaEmpresa.categoria, "Micro") && strcmp(novaEmpresa.categoria, "PME") && strcmp(novaEmpresa.categoria, "Grande empresa"));
     printf("Rua da empresa: ");
-    scanf("%s", novaEmpresa.rua);
+    scanf(" %[^\n]", novaEmpresa.rua);
     printf("Localidade da empresa: ");
     scanf("%s", novaEmpresa.localidade);
     printf("Codigo postal da empresa: ");
@@ -63,13 +63,13 @@ void editarEmpresa(Empresas *catalogo, Ramos *catalogoRamos) {
             printf("NIF: ");
             scanf("%s", catalogo->empresas[i].nif);
             printf("Nome: ");
-            scanf("%s", catalogo->empresas[i].nome);
+            scanf(" %[^\n]", catalogo->empresas[i].nome);
             do {
                 printf("Categoria (Micro, PME or Grande empresa): ");
                 scanf("%s", catalogo->empresas[i].categoria);
             } while(strcmp(catalogo->empresas[i].categoria, "Micro") && strcmp(catalogo->empresas[i].categoria, "PME") && strcmp(catalogo->empresas[i].categoria, "Grande empresa"));
             printf("Rua: ");
-            scanf("%s", catalogo->empresas[i].rua);
+            scanf(" %[^\n]", catalogo->empresas[i].rua);
             printf("Localidade: ");
             scanf("%s", catalogo->empresas[i].localidade);
             printf("Codigo postal: ");
@@ -133,43 +133,6 @@ void empresasAtivas(Empresas *catalogo) {
 void removerEmpresa(Empresas *catalogo) {
 
 }
-
-//NAO WORK
-void classificarEmpresa(Empresas *catalogo) {
-    char nif[MAXG];
-    printf("Nif da empresa a classificar: ");
-    scanf("%s", nif);
-
-    for(int i = 0; i < catalogo->contador; i++) {
-        if(strcmp(catalogo->empresas[i].nif, nif) == 0) {
-            if(catalogo->contador == catalogo->alocadas) {
-                // Numero maximo atingido aloca mais!
-                catalogo->alocadas += 10; 
-                catalogo->empresas[i].classis = realloc(catalogo->empresas[i].classis, catalogo->alocadas * sizeof(Classificacao));
-            }
-            Classificacao novaClassificacao;
-
-            printf("Nome do utilizador: ");
-            scanf("%s", novaClassificacao.nome);
-            printf("Email do utilizador: ");
-            scanf("%s", novaClassificacao.email);
-            do {
-                printf("Avaliacao da empresa (0-5): ");
-                scanf("%d", &novaClassificacao.avaliacao);
-            } while(novaClassificacao.avaliacao < 0 || novaClassificacao.avaliacao > 5);
-
-            catalogo->empresas[i].classis[catalogo->empresas[i].nClassificacoes] = novaClassificacao;
-            catalogo->empresas[i].nClassificacoes++;
-
-            printf("Classificacao adicionada com sucesso!\n");
-            return;
-        }
-    }
-
-    printf("Empresa nao encontrada.\n");
-}
-
-
 
 void liberarMemoriaEmpresas(Empresas *catalogo) {
     for (int i = 0; i < catalogo->contador; i++) {

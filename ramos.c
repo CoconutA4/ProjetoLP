@@ -17,7 +17,7 @@ void criarRamo(Ramos *catalogo) {
     printf("Codigo da atividade: ");
     scanf("%s", novoRamo.codigoAtividade);
     printf("Nome do ramo de atividade: ");
-    scanf("%s", novoRamo.nome);
+    scanf(" %[^\n]", novoRamo.nome);
 
     novoRamo.estado = 1;
     
@@ -54,7 +54,7 @@ void editarRamo(Ramos *catalogo){
             printf("Codigo: ");
             scanf("%s", catalogo->ramos[i].codigoAtividade);
             printf("Nome: ");
-            scanf("%s", catalogo->ramos[i].nome);
+            scanf(" %[^\n]", catalogo->ramos[i].nome);
             printf("Esrado: (0/1): ");
             scanf("%d", catalogo->ramos[i].estado);
             printf("Ramo editado!\n");
