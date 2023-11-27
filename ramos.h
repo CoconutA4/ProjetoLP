@@ -3,8 +3,7 @@
 
 #define MAXG 50
 #define MAXBIG 200
-
-#define NENCONTRADO "Nao foi encontrado nehum ramo com esse codigo\n"
+#define NENCONTRADOCOD "Nao foi encontrado nehum ramo com esse codigo\n"
 
 #ifdef __cplusplus
 extern "C" {
