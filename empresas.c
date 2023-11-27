@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "empresas.h"
+#include "verificacoes.h"
 #include "string.h"
 #include "ctype.h"
 
@@ -13,14 +14,23 @@ void criarEmpresa(Empresas *catalogo, Ramos *catalogoRamos) {
 
     Empresa novaEmpresa;
 
-    printf("Nif da empresa: ");
-    scanf("%s", novaEmpresa.nif);
+    do{
+        printf("Nif da empresa: ");
+        scanf("%s", novaEmpresa.nif);
+        if (verificaNIF(novaEmpresa.nif)) {
+        }else {
+                printf("O NIF não é válido.\n");
+        }
+    }while(verificaNIF(novaEmpresa.nif) != 1);
+    
     printf("Nome da empresa: ");
     scanf(" %[^\n]", novaEmpresa.nome);
+    
     do {
         printf("Categoria da empresa(Micro, PME ou Grande empresa): ");
         scanf("%s", novaEmpresa.categoria);
     }while(strcmp(novaEmpresa.categoria, "Micro") && strcmp(novaEmpresa.categoria, "PME") && strcmp(novaEmpresa.categoria, "Grande empresa"));
+    
     printf("Rua da empresa: ");
     scanf(" %[^\n]", novaEmpresa.rua);
     printf("Localidade da empresa: ");

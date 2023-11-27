@@ -38,7 +38,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/empresas.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/pesquisas.o \
-	${OBJECTDIR}/ramos.o
+	${OBJECTDIR}/ramos.o \
+	${OBJECTDIR}/verificacoes.o
 
 
 # C Compiler Flags
@@ -84,6 +85,11 @@ ${OBJECTDIR}/ramos.o: ramos.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ramos.o ramos.c
+
+${OBJECTDIR}/verificacoes.o: verificacoes.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/verificacoes.o verificacoes.c
 
 # Subprojects
 .build-subprojects:
