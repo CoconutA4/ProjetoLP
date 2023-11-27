@@ -133,7 +133,7 @@ int main() {
                         procurarEmpresa(&Empresa, &Pesquisa);
                         break;
                     case 2:
-                        classificarEmpresa(&Empresa);
+                            //classificar empresa
                         break;
                     case 3: //comentar relatiorios
                         break;
