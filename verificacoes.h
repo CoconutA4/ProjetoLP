@@ -7,6 +7,8 @@ extern "C" {
 
 
 int verificaNIF(char *nif);
+int verificaCategoria(char *categoria);
+int verificaCodigoPostal(char *codigoPostal);
 
 #ifdef __cplusplus
 }
