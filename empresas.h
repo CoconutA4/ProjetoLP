@@ -2,7 +2,6 @@
 #define EMPRESAS_H
 
 #include "ramos.h"
-#include "classificacoes.h"
 
 #define NENCONTRADO "Nao foi encontrada empresa com esse NIF\n"
 
@@ -13,6 +12,12 @@
 extern "C" {
 #endif
 
+typedef struct {
+    int avaliacao;
+    char nome[MAXG];
+    char email [MAXG];
+}Classificacao;    
+    
 typedef struct {
     char nome[MAXG];
     char email[MAXG];
@@ -47,7 +52,6 @@ void liberarMemoriaEmpresas(Empresas *catalogo);
 void empresasAtivas(Empresas *catalogo);
 void editarEmpresa(Empresas *catalogo, Ramos *catalogoRamos);
 void removerEmpresa(Empresas *catalogo);
-void classificarEmpresa(Empresas *catalogo);
 
 #ifdef __cplusplus
 }

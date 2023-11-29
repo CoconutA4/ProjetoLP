@@ -17,6 +17,7 @@ void criarEmpresa(Empresas *catalogo, Ramos *catalogoRamos) {
         catalogo->alocadas += 10; 
         catalogo->empresas = realloc(catalogo->empresas, catalogo->alocadas * sizeof(Empresa));
     }
+    
 
     Empresa novaEmpresa;
 
@@ -38,6 +39,10 @@ void criarEmpresa(Empresas *catalogo, Ramos *catalogoRamos) {
     do {
         printf("Categoria da empresa(Micro, PME ou Grande empresa): ");
         scanf("%s", novaEmpresa.categoria);
+        if (!verificaCategoria(novaEmpresa.categoria))
+        {
+                printf("A categoria nao e valida.\n");
+        }
     }while(!verificaCategoria(novaEmpresa.categoria));
     
     // Solicita a rua da empresa
@@ -123,10 +128,14 @@ void editarEmpresa(Empresas *catalogo, Ramos *catalogoRamos) {
             printf("Nome: ");
             scanf(" %[^\n]", catalogo->empresas[i].nome);
             
-            // Solicita a nova categoria da empresa e verifica se é válida
+            // Solicita a categoria da empresa e verifica se é válida
             do {
                 printf("Categoria da empresa(Micro, PME ou Grande empresa): ");
                 scanf("%s", catalogo->empresas[i].categoria);
+                if (!verificaCategoria(catalogo->empresas[i].categoria))
+                {
+                        printf("A categoria nao e valida.\n");
+                }
             }while(!verificaCategoria(catalogo->empresas[i].categoria));
             
             // Solicita a nova rua da empresa
@@ -177,8 +186,6 @@ void editarEmpresa(Empresas *catalogo, Ramos *catalogoRamos) {
     printf(NENCONTRADO);
 }
 
-
-
 /**
  * @brief Função para mostrar todas as empresas no catálogo.
  * @param catalogo Apontador para o catálogo de empresas.
@@ -208,7 +215,6 @@ void mostrarEmpresas(Empresas *catalogo) {
     }
 }
 
-
 /**
  * @brief Função para mostrar todas as empresas ativas no catálogo.
  * @param catalogo Apontador para o catálogo de empresas.
@@ -224,7 +230,6 @@ void empresasAtivas(Empresas *catalogo) {
         }
     }
 }
-
 
 void removerEmpresa(Empresas *catalogo) {
 
@@ -244,3 +249,5 @@ void liberarMemoriaEmpresas(Empresas *catalogo) {
     // Libera a memória alocada para o array de empresas
     free(catalogo->empresas);
 }
+
+

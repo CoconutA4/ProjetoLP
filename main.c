@@ -169,6 +169,7 @@ int main() {
                         break;
                     case 2:
                         // Classifica uma empresa
+                        classificarEmpresa(&Empresa);
                         break;
                     case 3:
                         // Comenta sobre relatórios
