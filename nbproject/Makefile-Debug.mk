@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/classificacoes.o \
 	${OBJECTDIR}/empresas.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/pesquisas.o \
@@ -65,6 +66,11 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/projetolp.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/projetolp ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/classificacoes.o: classificacoes.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/classificacoes.o classificacoes.c
 
 ${OBJECTDIR}/empresas.o: empresas.c
 	${MKDIR} -p ${OBJECTDIR}

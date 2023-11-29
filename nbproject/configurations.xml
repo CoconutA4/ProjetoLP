@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>classificacoes.h</itemPath>
       <itemPath>empresas.h</itemPath>
       <itemPath>pesquisas.h</itemPath>
       <itemPath>ramos.h</itemPath>
@@ -16,6 +17,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>classificacoes.c</itemPath>
       <itemPath>empresas.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>pesquisas.c</itemPath>
@@ -44,6 +46,10 @@
       </toolsSet>
       <compileType>
       </compileType>
+      <item path="classificacoes.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="classificacoes.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="empresas.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="empresas.h" ex="false" tool="3" flavor2="0">
@@ -83,6 +89,10 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="classificacoes.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="classificacoes.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="empresas.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="empresas.h" ex="false" tool="3" flavor2="0">
