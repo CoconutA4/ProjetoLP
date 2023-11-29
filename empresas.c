@@ -26,7 +26,7 @@ void criarEmpresa(Empresas *catalogo, Ramos *catalogoRamos) {
         scanf("%s", novaEmpresa.nif);
         if (!verificaNIF(novaEmpresa.nif))
         {
-                printf("O NIF não é válido.\n");
+                printf("O NIF nao e valido.\n");
         }
     }while(!verificaNIF(novaEmpresa.nif));
     
@@ -53,7 +53,7 @@ void criarEmpresa(Empresas *catalogo, Ramos *catalogoRamos) {
         scanf("%s", novaEmpresa.codigoPostal);
         if (!verificaCodigoPostal(novaEmpresa.codigoPostal)) 
         {
-            printf("O NIF não é válido.\n");
+            printf("O NIF nao e valido.\n");
         }
     }while(!verificaCodigoPostal(novaEmpresa.codigoPostal));
 
@@ -70,7 +70,7 @@ void criarEmpresa(Empresas *catalogo, Ramos *catalogoRamos) {
         strcpy(novaEmpresa.ramo, catalogoRamos->ramos[escolha-1].nome);
     } else {
         // Se não existirem ramos de atividade, informa o usuário e retorna
-        printf("Não existem ramos de atividade disponíveis. Por favor, crie um ramo de atividade antes de criar uma empresa.\n");
+        printf("Nao existem ramos de atividade disponíveis. Por favor, crie um ramo de atividade antes de criar uma empresa.\n");
         return;
     }
 
